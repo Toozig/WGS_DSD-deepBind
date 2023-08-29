@@ -4,21 +4,26 @@
 # requierment: https://github.com/kipoi/kipoi
 
 
-module load hurcs homer # needed for the refrence file 
-REFRENCE='/usr/local/hurcs/homer/4.11/data/genomes/hg38/genome.fa'
-conda activate kipoi-DeepBind
+
+intervals=$1
+fasta_file=$2
+# conda activate kipoi-DeepBind
 MODEL="DeepBind/Homo_sapiens/TF/D00649.002_SELEX_SOX9"
-INTERVALS="example/intervals_file"
-
-
-OUTPUT=""
-
+MODEL_NAME="${MODEL##*_}"
+echo $faste_file
+FASTA_NAME=`basename $fasta_file .fa`
+output="${MODEL_NAME}_${FASTA_NAME}.tsv" 
 
 kipoi get-example $MODEL -o example
 
 
 
-kipoi predict $MODEL --dataloader_args="{\"intervals_file\": $INTERVALS, \"fasta_file\": $REFRENCE}" -o $OUTPUT
+kipoi predict $MODEL --dataloader_args="{\"intervals_file\": $intervals, \"fasta_file\": $fasta_file}" -o "tmp_out.tsv"
 # check the results
-head '/tmp/DeepBind|Homo_sapiens|TF|D00649.002_SELEX_SOX9.example_pred.tsv'
+
+sed -i '1d' tmp_out.tsv 
+ paste $intervals  tmp_out.tsv  > $output
+rm -f tmp_out
+head  $output 
+echo "output can be found at- $output"
 
