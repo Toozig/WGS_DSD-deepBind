@@ -11,7 +11,7 @@ fasta_file=$2
 MODEL="DeepBind/Homo_sapiens/TF/D00649.002_SELEX_SOX9"
 MODEL_NAME="${MODEL##*_}"
 echo $faste_file
-FASTA_NAME=`basename $fasta_file .fa`
+FASTA_NAME=`basename $intervals .bed`
 output="${MODEL_NAME}_${FASTA_NAME}.tsv" 
 
 kipoi get-example $MODEL -o example
