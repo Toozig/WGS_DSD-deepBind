@@ -16,8 +16,9 @@ intervals=$1  # BED file containing genomic intervals
 fasta_file=$2  # FASTA file containing genomic sequences
 
 # Name of the pre-trained DeepBind model to use
-MODEL="DeepBind/Homo_sapiens/TF/D00649.002_SELEX_SOX9"
-
+# MODEL="DeepBind/Homo_sapiens/TF/D00649.002_SELEX_SOX9" #SOX9 mode
+MODEL="DeepBind/Homo_sapiens/TF/D00411.003_SELEX_GATA4" #GATA4 model
+# MODEL="DeepBind/Homo_sapiens/TF/D00296.006_SELEX_AR" #santy check model
 # Extract the model name from the MODEL string
 MODEL_NAME="${MODEL##*_}"
 
