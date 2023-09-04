@@ -105,13 +105,13 @@ def checkIfExistsResult(regionFile, sampleFile){
 
 }
 
-process mergeChrom {
+process createSegmentFile {
     label "small_slurm"
-    tag "merge_${chrom}"
+    tag "segmentFile_${id}"
     
     input:
-    tuple val(chrom), path(gnomAD), path(gnomADtbi)
-    path file_list
+    tuple val(id), val(seq)
+    val window_size
 
     output:
     path "${chrom}.tsv"
