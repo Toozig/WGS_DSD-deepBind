@@ -80,7 +80,14 @@ In our experiments, we employed the following components:
 
 ### Analysis Method
 
-We performed our analysis on a 16-base pair window with an 8-base pair shift over the sequence. deepBind analysis was conducted on three transcription factors (TFs) to evaluate their binding to the enhancer:
+We performed our analysis on a 16-base pair window with an 8-base pair shift over the sequence.<br>
+In order to generate a bed file with the described windows, the following commaned was preformed
+
+```bash
+bin/create_segment_file.py 'data/en13_seq.fa' 16 8
+```
+ 
+ deepBind analysis was conducted on three transcription factors (TFs) to evaluate their binding to the enhancer:
 
 1. **SOX9**
 2. **GATA4**
@@ -88,8 +95,13 @@ We performed our analysis on a 16-base pair window with an 8-base pair shift ove
 
 The AR transcription factor was included as a control in our experiments.
 
+Example command to run the SOX9 model:
 
+```bash
+bin/deepBind.sh 'data/en13_seq_win_16_shift_8.bed' 'data/en13_seq.fa' 'DeepBind/Homo_sapiens/TF/D00649.002_SELEX_SOX9'
+```
 
+List of all available models of deepBind can be found [here](http://kipoi.org/groups/DeepBind/)
 
 ## DeepBind Result Processing
 
@@ -107,10 +119,7 @@ This process ultimately resulted in the assignment of a binding score to each nu
 
 The graphical representation of the result is provided below:
 
-
-
-
     
 ![png](deepBind_analysis_files/deepBind_analysis_8_0.png)
     
-
+The code for generating the plot can be found in [deepBind_analysis.ipynb]
