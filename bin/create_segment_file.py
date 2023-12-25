@@ -46,7 +46,7 @@ def get_sequence_lengths(fasta_filename):
     sequence_lengths = {record.id: len(record.seq) for record in SeqIO.parse(fasta_filename, "fasta")}
     return sequence_lengths
 
-def generate_bed_file(seq_id, seq_length, window_size, shift_size):
+def generate_bed_file(seq_id, seq_length, window_size, shift_size,boundry = 50):
     """
     Generate a DataFrame with BED file records based on sequence information.
 
@@ -59,7 +59,6 @@ def generate_bed_file(seq_id, seq_length, window_size, shift_size):
     Returns:
         pd.DataFrame: A DataFrame containing BED records.
     """
-    boundry = window_size*3
     start = np.arange(start=boundry, stop=seq_length, step=shift_size)
     end = start + window_size
     
@@ -98,4 +97,4 @@ if __name__ == "__main__":
     print(f"Output Filename: {output_filename}")
     print("Prepering BED file")
     main(fasta_file, window_size, shift_size, output_filename)
-    print(f"prediction generated successfully.")
+    print(f"segment file generated successfully.")
